@@ -34,7 +34,7 @@ def search(query: str):
 
     retriever = store.as_retriever(search_kwargs={"k": 10})
     
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", temperature=0.1)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", temperature=0.4)
 
     template = """
 CONTEXTO:
@@ -42,6 +42,7 @@ CONTEXTO:
 
 REGRAS:
 - Responda somente com base no CONTEXTO.
+- Elabore a resposta em uma frase completa e de forma cordial.
 - Se a informação não estiver explicitamente no CONTEXTO, responda:
   "Não tenho informações necessárias para responder sua pergunta."
 - Nunca invente ou use conhecimento externo.
@@ -56,6 +57,10 @@ Resposta: "Não tenho informações necessárias para responder sua pergunta."
 
 Pergunta: "Você acha isso bom ou ruim?"
 Resposta: "Não tenho informações necessárias para responder sua pergunta."
+
+EXEMPLO DE RESPOSTA ELABORADA:
+Pergunta: "Qual o faturamento da Empresa X?"
+Resposta: "O faturamento da Empresa X foi de R$ 500.000.000,00."
 
 PERGUNTA DO USUÁRIO:
 {pergunta}
